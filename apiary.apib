@@ -5,7 +5,7 @@ FORMAT: 1A
 # Group Transactions
 
 ## Transactions [/api/transactions]
-### List all Transactions [GET]
+### List all transactions [GET]
 + Response 200 (application/json)
 
         [
@@ -22,3 +22,19 @@ FORMAT: 1A
                 "date": "2014-11-16"
             }
         ]
+
+### Add a transaction [POST]
++ Request (application/json)
+
+        {
+            "description": "Dinner with Smeagol",
+            "amount": 44.34,
+            "date": "2014-11-12"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "status": "Transaction added",
+            "id": 3
+        }
