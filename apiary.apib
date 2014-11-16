@@ -1,0 +1,40 @@
+FORMAT: 1A
+
+# ggvb API
+
+# Group Transactions
+
+## Transactions [/api/transactions]
+### List all transactions [GET]
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "description": "Philz Coffee",
+                "amount": 3.5,
+                "date": "2014-11-15"
+            },
+            {
+                "id": 2,
+                "description": "Toy for Violet",
+                "amount": 6.78,
+                "date": "2014-11-16"
+            }
+        ]
+
+### Add a transaction [POST]
++ Request (application/json)
+
+        {
+            "description": "Dinner with Smeagol",
+            "amount": 44.34,
+            "date": "2014-11-12"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "status": "Transaction added",
+            "id": 3
+        }
