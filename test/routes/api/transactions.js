@@ -26,4 +26,16 @@ describe('Transactions API:', function() {
         })
     })
 
+    describe('POST /api/transactions', function() {
+        it('creates a new transaction', function(done) {
+            var transaction = {transactionDate: '2014-11-21', description: 'Test Transaction', amount: 123.45}
+            request(app)
+                .post('/api/transactions')
+                .set('Accept', 'application/json')
+                .send(transaction)
+                .expect('Content-Type', /json/)
+                .expect(201, done)
+        })
+    })
+
 })

@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
     models.Transaction.create(req.body).success(function(transaction) {
         payload = {"message": "Transaction created", "transactionId": transaction.transactionId}
-        res.json(payload)
+        res.status(201).json(payload)
     })
 })
 
