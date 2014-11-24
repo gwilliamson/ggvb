@@ -7,9 +7,24 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    description: DataTypes.STRING,
-    amount: DataTypes.DECIMAL(10,2),
-    transactionDate: DataTypes.DATE
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    amount: {
+      type: DataTypes.DECIMAL(10,2),
+      allowNull: false
+    },
+    transactionDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true
+      }
+    }
   }, {
     classMethods: {
       associate: function(models) {
