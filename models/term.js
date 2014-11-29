@@ -4,18 +4,49 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    var Transaction = sequelize.define("Term", {
+    var Term = sequelize.define("Term", {
         termId: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        type: DataTypes.ENUM('week'),
-        name: DataTypes.STRING,
-        startDate: DataTypes.DATE,
-        numDays: DataTypes.INTEGER,
-        sequence: DataTypes.INTEGER,
-        limit: DataTypes.DECIMAL
+        type: {
+            type: DataTypes.ENUM('week'),
+            allowNull: false
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            notEmpty: true
+        },
+        startDate: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            validate: {
+                isDate: true
+            }
+        },
+        endDate: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            validate: {
+                isDate: true
+            }
+        },
+        sequence: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                isInt: true
+            }
+        },
+        limit: {
+            type: DataTypes.DECIMAL,
+            allowNull: true,
+            validate: {
+                isDecimal: true
+            }
+        }
     }, {
         classMethods: {
             associate: function(models) {
@@ -24,5 +55,5 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    return Transaction;
+    return Term;
 };

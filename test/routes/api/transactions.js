@@ -19,9 +19,6 @@ describe('Transactions API:', function () {
                     amount: 123.45
                 }
                 models.Transaction.create(transaction)
-                    .then(function (transaction) {
-                        console.log('Inserted transaction ' + transaction.transactionId)
-                    })
                     .catch(function (err) {
                         console.log(err)
                     })

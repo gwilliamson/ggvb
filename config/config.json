@@ -8,7 +8,8 @@
     "dialect": "mysql"
   },
   "test": {
-    "dialect": "sqlite"
+    "dialect": "sqlite",
+    "logging": null
   },
   "production": {
     "username": "root",
