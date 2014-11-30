@@ -8,25 +8,24 @@
 </head>
 <body ng-controller="BudgetController as budget">
     <div class="container">
-        <div id="termName" class="row">
-            <div class="page-header">
-                <h3>{{budget.term.name}} starting {{budget.term.startDate | date : 'EEEE, MMMM d, yyyy'}}</h3>
-            </div>
+        <div class="page-header">
+            <h3>{{budget.term.name}} <small>starting {{budget.term.startDate | date : 'EEEE, MMMM d, yyyy'}}</small></h3>
+
         </div>
         <div id="term" class="row">
-            <div id="termLimit" class="col-md-2 text-center">
+            <div id="termLimit" class="col-xs-4 text-center">
                 <div class="panel panel-info">
                     <div class="panel-heading">Budget</div>
                     <div class="panel-body big-number">{{budget.term.limit | currency:"$":0}}</div>
                 </div>
             </div>
-            <div id="totalSpent" class="col-md-2 text-center">
+            <div id="totalSpent" class="col-xs-4 text-center">
                 <div class="panel panel-danger">
                     <div class="panel-heading">Spent</div>
                     <div class="panel-body big-number">{{budget.spent | currency:"$":0}}</div>
                 </div>
             </div>
-            <div id="amountLeft" class="col-md-2 text-center">
+            <div id="amountLeft" class="col-xs-4 text-center">
                 <div class="panel panel-success">
                     <div class="panel-heading">Left</div>
                     <div class="panel-body big-number">{{budget.left | currency:"$":0}}</div>
@@ -34,34 +33,35 @@
             </div>
         </div>
         <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading tx-heading">Transactions</div>
-                <div class="panel-body">
-                    <form novalidate name="transactionForm" class="form-inline">
-                        <div class="form-group">
-                            <label class="sr-only" for="transactionDateInput">Transaction Date</label>
-                            <input type="date" class="form-control" id="transactionDateInput" required ng-model="transaction.transactionDate">
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="transactionDescriptionInput">Description</label>
-                            <input type="input" class="form-control" id="transactionDescriptionInput" placeholder="Description" required ng-model="transaction.description">
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="transactionAmountInput">Amount</label>
-                            <input type="number" class="form-control" id="transactionAmountInput" placeholder="Amount" required ng-model="transaction.amount">
-                        </div>
-                        <button ng-click="save(transaction)" ng-disabled="transactionForm.$invalid" class="btn btn-primary">Add Transaction</button>
-                    </form>
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading tx-heading">Transactions</div>
+                    <div class="panel-body">
+                        <form novalidate name="transactionForm" class="form-inline">
+                            <div class="form-group">
+                                <label class="sr-only" for="transactionDateInput">Transaction Date</label>
+                                <input type="date" class="form-control" id="transactionDateInput" required ng-model="transaction.transactionDate">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="transactionDescriptionInput">Description</label>
+                                <input type="input" class="form-control" id="transactionDescriptionInput" placeholder="Description" required ng-model="transaction.description">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="transactionAmountInput">Amount</label>
+                                <input type="number" class="form-control" id="transactionAmountInput" placeholder="Amount" required ng-model="transaction.amount">
+                            </div>
+                            <button ng-click="save(transaction)" ng-disabled="transactionForm.$invalid" class="btn btn-primary">Add Transaction</button>
+                        </form>
+                    </div>
+                    <table class="table table-striped">
+                        <tr ng-repeat="tx in budget.transactions">
+                            <td class="col-md-2">{{tx.transactionDate | date}} ({{tx.transactionDate | date : 'EEE'}})</td>
+                            <td class="col-md-6">{{tx.description}}</td>
+                            <td class="col-md-2" align="right">{{tx.amount | currency}}</td>
+                            <td class="col-md-2" align="right"><a href="#" ng-click="delete(tx.transactionId)">Delete</a></td>
+                        </tr>
+                    </table>
                 </div>
-                <table class="table table-striped">
-                    <tr ng-repeat="tx in budget.transactions">
-                        <td>{{tx.transactionDate | date}} ({{tx.transactionDate | date : 'EEE'}})</td>
-                        <td>{{tx.description}}</td>
-                        <td align="right">{{tx.amount | currency}}</td>
-                        <td align="right"><a href="#" ng-click="delete(tx.transactionId)">Delete</a></td>
-                    </tr>
-                </table>
-
             </div>
         </div>
     </div>
